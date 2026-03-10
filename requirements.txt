@@ -1,0 +1,12 @@
+MetaTrader5
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+#tensorflow
+keras-tuner
+pandas-ta
+openai
+python-dotenv
+streamlit

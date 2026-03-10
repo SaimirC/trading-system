@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# API keys dhe skedarë të ndjeshëm
+.env
+
+# Të dhëna të mëdha (nëse do të kesh)
+data/*.csv
+data/*.h5
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/*.log
