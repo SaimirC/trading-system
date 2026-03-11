@@ -8,7 +8,6 @@ import MetaTrader5 as mt5
 import sys
 import os
 
-# Shtojmë rrugën e dosjes kryesore për të importuar config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import config
 
@@ -29,7 +28,7 @@ def calculate_adx(high, low, close, period=14):
     tr3 = abs(low - close.shift())
     tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
     
-    # Llogarit ATR (Average True Range) për të dhënë një bazë
+    # Llogarit ATR
     atr = tr.rolling(window=period).mean()
     
     # Llogarit +DI dhe -DI
@@ -51,7 +50,7 @@ def classify_regime(adx_value, threshold=25):
     else:
         return "RANGING"
 
-def get_market_regime(symbol, timeframe=mt5.TIMEFRAME_H1, bars=100):
+def get_market_regime(symbol, timeframe=mt5.TIMEFRAME_H1, bars=200):
     """
     Merr të dhënat për një simbol dhe kthen regjimin aktual të tregut.
     """
@@ -64,11 +63,9 @@ def get_market_regime(symbol, timeframe=mt5.TIMEFRAME_H1, bars=100):
     df['time'] = pd.to_datetime(df['time'], unit='s')
     df.set_index('time', inplace=True)
     
-    # Llogarit ADX
     adx, _, _ = calculate_adx(df['high'], df['low'], df['close'], 
                                period=config.INDICATOR_PARAMS['adx_window'])
     
-    # Vlera më e fundit e ADX
     current_adx = adx.iloc[-1]
     regime = classify_regime(current_adx)
     
@@ -80,20 +77,15 @@ def get_market_regime(symbol, timeframe=mt5.TIMEFRAME_H1, bars=100):
         'adx_series': adx
     }
 
-# ============================================
-# TESTIMI I FUNKSIONIT PËR TË GJITHA INSTRUMENTET
-# ============================================
 if __name__ == "__main__":
-    # Lidhu me MT5
     if not mt5.initialize():
         print("Lidhja me MT5 dështoi")
         quit()
-    print("Lidhur me MT5\n")
     
-    # Testo për secilin instrument në listë
+    print("\n=== TESTIMI I ADX PËR TË GJITHA INSTRUMENTET ===\n")
     for symbol in config.INSTRUMENTS:
         result = get_market_regime(symbol, mt5.TIMEFRAME_H1, bars=200)
         if result:
-            print(f"{symbol}: ADX = {result['adx']:.2f} -> Regjimi: {result['regime']}")
+            print(f"{symbol}: ADX = {result['adx']:.2f} -> {result['regime']}")
     
     mt5.shutdown()

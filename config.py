@@ -32,3 +32,9 @@ INDICATOR_PARAMS = {
 SWING_PARAMS = {
     "order": 5  # Numri i shufrave për të majtas/djathtas për ekstremet lokale
 }
+
+# Parametrat për Fibonacci
+FIB_PARAMS = {
+    "tolerance": 0.001,  # 0.1% tolerancë për zonën Golden Pocket
+    "confluence_threshold": 3  # Pragu për sinjal (score >= 3)
+}
