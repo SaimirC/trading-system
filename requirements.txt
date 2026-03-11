@@ -10,3 +10,7 @@ pandas-ta
 openai
 python-dotenv
 streamlit
+pip freeze > requirements.txt
+git add requirements.txt
+git commit -m "Shto requirements.txt"
+git push
