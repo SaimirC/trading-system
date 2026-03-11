@@ -34,7 +34,7 @@ if rates is None:
 df = pd.DataFrame(rates)
 df['time'] = pd.to_datetime(df['time'], unit='s')
 df.set_index('time', inplace=True)
-
+python signals/trend_filter.py
 # Llogarit indikatorët duke përdorur parametrat nga config
 df['rsi'] = ta.momentum.RSIIndicator(df['close'], window=config.INDICATOR_PARAMS['rsi_window']).rsi()
 df['ema50'] = ta.trend.EMAIndicator(df['close'], window=config.INDICATOR_PARAMS['ema_fast']).ema_indicator()
