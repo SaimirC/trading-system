@@ -22,6 +22,7 @@ print("Lidhur me MT5")
 symbol = config.INSTRUMENTS[0]  # "EURUSD"
 print(f"\n=== Analizoj {symbol} ===")
 
+
 # Merr 100 shufrat e fundit M15
 rates = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_M15, 0, 100)
 if rates is None:

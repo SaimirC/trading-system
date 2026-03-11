@@ -3,6 +3,10 @@ venv/
 env/
 ENV/
 
+venv310/
+__pycache__/
+*.pyc
+.env
 # Python cache
 __pycache__/
 *.pyc
@@ -26,3 +30,4 @@ Thumbs.db
 
 # Logs
 logs/*.log
+venv310/
